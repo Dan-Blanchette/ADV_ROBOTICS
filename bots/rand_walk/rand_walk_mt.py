@@ -44,7 +44,7 @@ class Chocobo(Node):
     Class to coordinate actions and subscriptions
     """
     def __init__(self, namespace):
-        super().__init__('chocobo')
+        super().__init__('chocobo')     # type: ignore
 
         # 2 Seperate Callback Groups for handling the bumper Subscription and Action Clients
         cb_Subscripion = MutuallyExclusiveCallbackGroup()
@@ -113,7 +113,7 @@ class Chocobo(Node):
                     # back up
                     self._drive_ac.wait_for_server()
                     self.get_logger().warning('SERVER AVAILIBLE')
-                    self.get_logger().warning('NOW INSIDE RUNAWAY PROTOCOL')
+                    self.get_logger().warning('NOW INSIDE BACKUP PROTOCOL')
                     dr_goal = DriveDistance.Goal()
                     dr_goal.distance = -0.2
                     self.sendDriveGoal(dr_goal)
@@ -157,12 +157,12 @@ class Chocobo(Node):
 
 
 
-        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN:
+        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN: # type:ignore
             pass # Wait until a Status has been assigned
 
         # After getting goalID, Loop while the goal is currently running
-        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED:
-            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED:
+        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED: # type:ignore
+            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED: # type:ignore
                 break # If the goal was canceled, stop looping otherwise loop until finished
             pass
         
@@ -179,11 +179,11 @@ class Chocobo(Node):
                 pass
             self._goal_uuid = rotation_handle.result()
 
-        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN:
+        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN: # type:ignore
             pass # Wait until a Status has been assigned
 
-        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED:
-            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED:
+        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED: # type:ignore
+            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED: # type:ignore
                 break # If the goal was canceled, stop looping otherwise loop until finished
             pass
 
@@ -206,12 +206,12 @@ class Chocobo(Node):
 
 
 
-        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN:
+        while self._goal_uuid.status == GoalStatus.STATUS_UNKNOWN: # type:ignore
             pass # Wait until a Status has been assigned
 
         # After getting goalID, Loop while the goal is currently running
-        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED:
-            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED:
+        while self._goal_uuid.status is not GoalStatus.STATUS_SUCCEEDED: # type:ignore
+            if self._goal_uuid.status is GoalStatus.STATUS_CANCELED: # type:ignore
                 break # If the goal was canceled, stop looping otherwise loop until finished
             pass
         

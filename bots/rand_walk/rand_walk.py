@@ -125,13 +125,13 @@ def main():
     node = Chocobo_Node("create3_05B9")
 
     # undock
-    cur_goal = Undock.Goal()
-    node.send_goal(Undock, 'undock', cur_goal)
+    ud_goal = Undock.Goal()
+    node.send_goal(Undock, 'undock', ud_goal)
 
     # drive for 1m
-    cur_goal = DriveDistance.Goal()
-    cur_goal.distance = 1.0
-    node.send_goal(DriveDistance, 'drive_distance', cur_goal)
+    drv_goal = DriveDistance.Goal()
+    drv_goal.distance = 1.0
+    node.send_goal(DriveDistance, 'drive_distance', drv_goal)
    # list of radian values
     radians = [1/6, 1/4, 1/3, 1/2, 2/3, 3/4, 5/6, 1, 7/6, 5/4, 4/3, 3/2, 5/3, 7/4, 11/6, 2,
                -1/6, -1/4, -1/3, -1/2, -2/3, -3/4, -5/6, -1, -7/6, -5/4, -4/3, -3/2, -5/3, -7/4, -11/6, -2]
@@ -139,20 +139,20 @@ def main():
     for i in range(0, 10):
 
       # turn a random
-      cur_goal = RotateAngle.Goal()
-      cur_goal.angle = (random.choice(radians) * math.pi)
-      node.send_goal(RotateAngle, 'rotate_angle', cur_goal)
+      rot_goal = RotateAngle.Goal()
+      rot_goal.angle = (random.choice(radians) * math.pi)
+      node.send_goal(RotateAngle, 'rotate_angle', rot_goal)
 
       # drive straight .75m
-      cur_goal = DriveDistance.Goal()
-      cur_goal.distance = 0.05
-      node.send_goal(DriveDistance,'drive_distance', cur_goal)
+      drv_goal = DriveDistance.Goal()
+      drv_goal.distance = 0.75
+      node.send_goal(DriveDistance,'drive_distance', drv_goal)
       print(f'completed iteration {i + 1}\n')
 
 
     # dock robot
-    cur_goal = Dock.Goal()
-    node.send_goal(Dock, 'dock', cur_goal)
+    dock_goal = Dock.Goal()
+    node.send_goal(Dock, 'dock', dock_goal)
 
     # shut down node
     rclpy.shutdown()
